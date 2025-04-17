@@ -1,0 +1,94 @@
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+local Window = Rayfield:CreateWindow({
+   Name = "Denn Chmo",
+   Icon = 0,
+   LoadingTitle = "Sanya Hub",
+   LoadingSubtitle = "by titela42",
+   Theme = "Default",
+   DisableRayfieldPrompts = true,
+   DisableBuildWarnings = true,
+   ConfigurationSaving = {
+      Enabled = true,
+      FolderName = "Rayfield",
+      FileName = "Denn"
+   },
+   Discord = {
+      Enabled = false,
+      Invite = "noinvitelink",
+      RememberJoins = true
+   },
+   KeySystem = false,
+   KeySettings = {
+      Title = "Untitled",
+      Subtitle = "Key System",
+      Note = "No method of obtaining the key is provided",
+      FileName = "Key",
+      SaveKey = true,
+      GrabKeyFromSite = false,
+      Key = {"Hello"}
+   }
+})
+
+local Tab = Window:CreateTab("Home", 7743876054)
+Tab:CreateSection("idk")
+Tab:CreateDivider()
+
+local Button = Tab:CreateButton({
+   Name = "Тп",
+   Callback = function()
+-- Получаем локального игрока
+local player = game.Players.LocalPlayer
+
+-- Ждем появления персонажа игрока
+local character = player.Character or player.CharacterAdded:Wait()
+
+-- Ждем появления HumanoidRootPart (основная часть для позиционирования)
+local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+-- Заданные координаты
+local targetPosition = Vector3.new(-24544, 407, -1511)
+
+-- Небольшая задержка перед телепортом (опционально, может помочь избежать проблем с загрузкой)
+-- wait(0.5) -- раскомментируйте, если нужно
+
+-- Устанавливаем позицию персонажа через CFrame
+-- Использование CFrame предпочтительнее для мгновенной телепортации
+if humanoidRootPart then
+  humanoidRootPart.CFrame = CFrame.new(targetPosition)
+  print("Игрок телепортирован в:", targetPosition)
+else
+  warn("Не удалось найти HumanoidRootPart для телепортации.")
+end
+
+-- Если вы хотите, чтобы скрипт отключался после одного использования (например, если он в StarterCharacterScripts и не должен работать при каждом респавне),
+-- вы можете добавить следующую строку в конце:
+-- script.Disabled = true
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Авто открытие",
+   CurrentValue = false,
+   Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+while true do
+local args = {
+    [1] = "52ea20fcb8fc4c549912140b8609cdf5",
+    [2] = 8,
+    [3] = {
+        [1] = Vector3.new(-24544, 404.55316162109375, -1523),
+        [2] = Vector3.new(-24552.484375, 404.55316162109375, -1519.4852294921875),
+        [3] = Vector3.new(-24535.515625, 404.55316162109375, -1519.4852294921875),
+        [4] = Vector3.new(-24556, 404.55316162109375, -1511),
+        [5] = Vector3.new(-24532, 404.55316162109375, -1511),
+        [6] = Vector3.new(-24552.484375, 404.55316162109375, -1502.5147705078125),
+        [7] = Vector3.new(-24535.515625, 404.55316162109375, -1502.5147705078125),
+        [8] = Vector3.new(-24544, 404.55316162109375, -1499)
+    }
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("Lootbox: Open"):InvokeServer(unpack(args))
+task.wait(0)
+end
+   end,
+})
